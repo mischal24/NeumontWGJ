@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cm1kli2f0pctb"]
+[gd_scene load_steps=3 format=3 uid="uid://cm1kli2f0pctb"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_t2ewv"]
+[ext_resource type="FontFile" uid="uid://cp6dy571g35ps" path="res://Resources/edunline.ttf" id="2_e4dcp"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,16 +12,41 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t2ewv")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.421875
-anchor_top = 0.45679
-anchor_right = 0.578125
-anchor_bottom = 0.544753
+anchor_left = 0.425347
+anchor_top = 0.75463
+anchor_right = 0.574653
+anchor_bottom = 0.87963
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_e4dcp")
+theme_override_font_sizes/font_size = 70
 text = "Play"
+flat = true
 metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 450.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.992157, 0.2, 1)
+theme_override_fonts/font = ExtResource("2_e4dcp")
+theme_override_font_sizes/font_size = 150
+text = "OOPS!!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

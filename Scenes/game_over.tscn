@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://wa6canjxr41e"]
+[gd_scene load_steps=3 format=3 uid="uid://wa6canjxr41e"]
 
 [ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_y1v1t"]
+[ext_resource type="FontFile" uid="uid://cp6dy571g35ps" path="res://Resources/edunline.ttf" id="2_qg550"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -11,14 +12,29 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y1v1t")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-anchor_left = 0.34375
-anchor_top = 0.304012
-anchor_right = 0.65625
-anchor_bottom = 0.339506
-offset_top = -1.52588e-05
+anchor_left = 0.261719
+anchor_top = 0.241512
+anchor_right = 0.738281
+anchor_bottom = 0.402006
+offset_left = 94.5
+offset_top = 40.4999
+offset_right = -94.5
+offset_bottom = -40.4999
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_qg550")
+theme_override_font_sizes/font_size = 100
 text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -31,8 +47,11 @@ anchor_top = 0.648148
 anchor_right = 0.65625
 anchor_bottom = 0.74537
 offset_top = 3.05176e-05
+theme_override_fonts/font = ExtResource("2_qg550")
+theme_override_font_sizes/font_size = 30
 button_mask = 3
 text = "Restart?"
+flat = true
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

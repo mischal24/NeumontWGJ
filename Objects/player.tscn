@@ -1,18 +1,122 @@
-[gd_scene load_steps=4 format=3 uid="uid://buh38wmb7jv5l"]
+[gd_scene load_steps=8 format=3 uid="uid://buh38wmb7jv5l"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_2f6xs"]
-[ext_resource type="Texture2D" uid="uid://cy3lcvwjqjv3" path="res://icon.svg" id="1_a02sm"]
+[ext_resource type="Texture2D" uid="uid://bigsml6rxqsp4" path="res://Textures/Player.png" id="2_kwe6x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t6wh1"]
 radius = 21.0
 height = 56.0
 
+[sub_resource type="Animation" id="Animation_7f3u6"]
+resource_name = "Run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1.1, 0.9, 1.1, 0.9, 1),
+"update": 0,
+"values": [0.0, -0.261799, 0.0, 0.261799, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.5, 3.5)]
+}
+
+[sub_resource type="Animation" id="Animation_f6am0"]
+resource_name = "Idle"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.5, 3.5)]
+}
+
+[sub_resource type="Animation" id="Animation_pjaju"]
+resource_name = "Jump"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(2, 1.3, 1),
+"update": 0,
+"values": [Vector2(3.5, 2.5), Vector2(3.5, 5), Vector2(3.5, 3.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l51q7"]
+_data = {
+"Idle": SubResource("Animation_f6am0"),
+"Jump": SubResource("Animation_pjaju"),
+"Run": SubResource("Animation_7f3u6")
+}
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_2f6xs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.328125, 0.4375)
-texture = ExtResource("1_a02sm")
+texture_filter = 1
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("2_kwe6x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_t6wh1")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+
+[node name="RememberTimer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_l51q7")
+}
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

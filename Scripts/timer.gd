@@ -23,7 +23,8 @@ func _process(delta):
 		if mins >= 1:
 			for i in current_scene.get_children():
 				i.call_deferred("queue_free")
-			await get_tree().create_timer(0.5).timeout
+			play_death()
+			await get_tree().create_timer(1).timeout
 			get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 
 func set_timer(scene):
@@ -33,3 +34,6 @@ func set_timer(scene):
 
 func reset_timer():
 	time = 0
+
+func play_death():
+	$Control/AnimationPlayer.play("Fade")

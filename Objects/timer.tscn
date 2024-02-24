@@ -1,6 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://dod7mokkgh5ye"]
+[gd_scene load_steps=5 format=3 uid="uid://dod7mokkgh5ye"]
 
 [ext_resource type="Script" path="res://Scripts/timer.gd" id="1_3lfcy"]
+[ext_resource type="FontFile" uid="uid://cp6dy571g35ps" path="res://Resources/edunline.ttf" id="2_kq0g7"]
+
+[sub_resource type="Animation" id="Animation_wvt2c"]
+resource_name = "Fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExplosionFade:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ExplosionFade:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.7, 2),
+"transitions": PackedFloat32Array(1.7411, 2.46229, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4w55q"]
+_data = {
+"Fade": SubResource("Animation_wvt2c")
+}
 
 [node name="Timer" type="CanvasLayer"]
 script = ExtResource("1_3lfcy")
@@ -14,13 +48,41 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.0
+offset_right = 88.0
+offset_bottom = 65.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.1021
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0.847059, 0.0941176, 0.337255, 1)
+theme_override_fonts/font = ExtResource("2_kq0g7")
+theme_override_font_sizes/font_size = 30
 text = "0:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="ExplosionFade" type="ColorRect" parent="Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
+libraries = {
+"": SubResource("AnimationLibrary_4w55q")
+}
