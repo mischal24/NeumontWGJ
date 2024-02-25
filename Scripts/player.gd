@@ -8,7 +8,7 @@ var time_to_start : float
 var flipped : bool = false
 
 # Jump variables
-var jump_height : float = 140.0
+var jump_height : float = 180.0
 var time_to_peak : float = 0.35
 var time_to_fall : float = 0.32
 
@@ -77,10 +77,7 @@ func _physics_process(delta):
 		elif can_jump and $CoyoteTimer.is_stopped():
 			$CoyoteTimer.start(coyote_time)
 
-		if Input.is_action_pressed("Jump"):
-			$RememberTimer.start(remember_time)
-
-		if can_jump and $RememberTimer.time_left > 0:
+		if Input.is_action_just_pressed("Jump") and can_jump:
 			jump()
 
 	move_and_slide()
