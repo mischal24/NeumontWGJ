@@ -10,11 +10,13 @@ config_version=5
 
 [application]
 
-config/name="Neumont Wgj"
+config/name="Oops!!"
+config/description="You may have made a mistake in the lab, get out quick before that mistake catches up to you!"
+config/version="NeumontWGJ"
 run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://icon.svg"
+config/icon="res://Textures/iconbig.png"
 
 [autoload]
 
