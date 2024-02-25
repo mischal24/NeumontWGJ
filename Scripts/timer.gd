@@ -13,7 +13,7 @@ func _ready():
 
 func _process(delta):
 	if timer_is_on:
-		time -= 1 * delta
+		time -= 0.1
 
 		var secs : float = fmod(time, 60)
 		var mins : float = fmod(time, 60*60) / 60
@@ -24,8 +24,6 @@ func _process(delta):
 			timer_is_on = false
 			play_death()
 			await get_tree().create_timer(1).timeout
-			for i in current_scene.get_children():
-				i.call_deferred("queue_free")
 			get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 
 func set_timer(scene):
