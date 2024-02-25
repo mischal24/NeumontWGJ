@@ -4,6 +4,7 @@ func _ready():
 	GlobalTimer.timer_is_on = false
 
 func _on_button_pressed():
+	GlobalTimer.reset_timer()
 	$AudioStreamPlayer2D.stream = load("res://Sounds/startup.wav")
 	$AudioStreamPlayer2D.play()
 	Music.stop()
