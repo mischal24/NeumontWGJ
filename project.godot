@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalTimer="*res://Objects/timer.tscn"
+Music="*res://Objects/music.tscn"
 
 [display]
 

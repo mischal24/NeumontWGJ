@@ -119,4 +119,6 @@ libraries = {
 "": SubResource("AnimationLibrary_l51q7")
 }
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

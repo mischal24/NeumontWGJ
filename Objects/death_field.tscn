@@ -59,6 +59,7 @@ script = ExtResource("1_dby4a")
 shape = SubResource("WorldBoundaryShape2D_s2hky")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1.1, 1.1, 1.1, 1)
 texture_filter = 1
 position = Vector2(-229.75, 336.5)
 scale = Vector2(8.26168, 10.5156)
@@ -70,6 +71,7 @@ libraries = {
 }
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(1.1, 1.1, 1.1, 1)
 texture_filter = 1
 position = Vector2(-1300.75, 336.5)
 scale = Vector2(11.7617, 10.5156)
@@ -81,4 +83,8 @@ libraries = {
 "": SubResource("AnimationLibrary_mavhx")
 }
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

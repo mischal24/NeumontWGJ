@@ -21,6 +21,10 @@ var can_jump : bool = false
 
 var remember_time : float = 0.011
 
+# SFX variables
+var jump_sfx = load("res://Sounds/jump.wav")
+var step_sfx = load("res://Sounds/step.wav")
+
 func direction() -> float:
 	return Input.get_action_raw_strength("Right") - Input.get_action_raw_strength("Left")
 
@@ -29,6 +33,10 @@ func gravity() -> float:
 
 func jump():
 	$AnimationPlayer.play("Jump")
+	if $AudioStreamPlayer2D.stream != jump_sfx:
+		$AudioStreamPlayer2D.stream = jump_sfx
+	if not $AudioStreamPlayer2D.playing:
+		$AudioStreamPlayer2D.play()
 	velocity.y = jump_vel
 
 func flip():
@@ -53,8 +61,15 @@ func _physics_process(delta):
 		if velocity.x > 0 and flipped: flip()
 
 		if is_on_floor():
-			if abs(velocity.x) > 100: $AnimationPlayer.play("Run")
-			else: $AnimationPlayer.play("Idle")
+			if abs(velocity.x) > 100:
+				$AnimationPlayer.play("Run")
+				if !$AudioStreamPlayer2D.playing:
+					$AudioStreamPlayer2D.stream = step_sfx
+					$AudioStreamPlayer2D.play()
+			elif $AudioStreamPlayer2D.playing:
+				$AudioStreamPlayer2D.stop()
+			else:
+				$AnimationPlayer.play("Idle")
 
 		# Jump
 		if is_on_floor() and not can_jump:
